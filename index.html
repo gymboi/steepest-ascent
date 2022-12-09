@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="images/icon/icon.jpg" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Numerical Methods</title>
+  </head>
+
+  <body>
+    <header id="header" class="open">
+      <button id="hamburger">
+        <img src="images/menu-outline.svg" class="white" alt="" srcset="" />
+      </button>
+      <div id="button-wrapper" class="open">
+        <button
+          title="Discussion of Theory"
+          id="discussion"
+          class="modal-button"
+        >
+          <img
+            src="images/newspaper-outline.svg"
+            class="white"
+            alt=""
+            srcset=""
+          />
+        </button>
+        <button title="Help" id="example" class="modal-button">
+          <img src="images/help-outline.svg" class="white" alt="" srcset="" />
+        </button>
+        <button title="About" id="about" class="modal-button">
+          <img
+            src="images/at-circle-outline.svg"
+            class="white"
+            alt=""
+            srcset=""
+          />
+        </button>
+      </div>
+    </header>
+    <div class="method-name">
+      <span>Steepest Ascent</span>
+      Method Calculator
+    </div>
+    <main>
+      <div class="row">
+        <div class="column">
+          <!--Left Div Box-->
+          <div class="input-wrapper">
+            <div class="input">
+              <div class="function-wrapper">
+                <div class="function">
+                  <label for="function">f(x,y): </label>
+                  <math-field id="function"></math-field>
+                </div>
+              </div>
+            </div>
+            <div class="input">
+              <div class="interval-wrapper">
+                <div class="interval">
+                  <label for="x0">x<sub>0</sub>: </label>
+                  <input id="x0" type="text" />
+                </div>
+                <div class="interval">
+                  <label for="y0">y<sub>0</sub>: </label>
+                  <input id="y0" type="text" />
+                </div>
+              </div>
+            </div>
+            <div class="input">
+              <div class="derivative-wrapper">
+                <div class="derivative">
+                  <math-field class="derivative-label" readonly
+                    >$$ \frac{\partial f}{\partial x} $$:</math-field
+                  >
+                  <math-field id="x-derivative"></math-field>
+                </div>
+              </div>
+            </div>
+            <div class="input">
+              <div class="derivative-wrapper">
+                <div class="derivative">
+                  <math-field class="derivative-label" readonly
+                    >$$ \frac{\partial f}{\partial y} $$:</math-field
+                  >
+                  <math-field id="y-derivative"></math-field>
+                </div>
+              </div>
+            </div>
+            <div class="input">
+              <div class="repetitions-wrapper">
+                <label for="repetitions">Repetitions: </label>
+                <input id="repetitions" type="number" />
+              </div>
+            </div>
+            <button id="calculate">Calculate</button>
+          </div>
+        </div>
+        <div class="column">
+          <!--Bottom Left Div Box-->
+          <div class="iterations-wrapper">
+            <div class="solution-title">Solution</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <!--Right Div Box-->
+
+          <div class="results-wrapper">
+            <table id="results"></table>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="js/jquery/jquery.min.js"></script>
+    <script src="js/compute-engine.js"></script>
+    <script src="js/mathlive/mathlive.js"></script>
+    <script src="js/math.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
