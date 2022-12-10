@@ -11,7 +11,7 @@ $(document).ready(function () {
         buttonWrapper.toggleClass('open');
     });
 
-    let tableHeaders = ['i', 'x<sub>l</sub>', 'x<sub>u</sub>', 'f(x<sub>l</sub>)', 'f(x<sub>u</sub>)', 'x<sub>r</sub>', 'f(x<sub>r</sub>)', 'ε<sub>a</sub>'];
+    let tableHeaders = ['i', 'x', 'y', '<math-field class="table-header" readonly>$$ \\frac{\\partial f}{\\partial x} $$</math-field>', '<math-field class="table-header" readonly>$$ \\frac{\\partial f}{\\partial y} $$</math-field>', 'h'];
     let results = $("#results");
 
     let hr = $('<tr></tr>');
@@ -22,16 +22,16 @@ $(document).ready(function () {
 
     // Function code
     let functionText = $("#function");
-    let formula = "";
+    let formula = "3xy+2y-3x^2-2y^2";
     functionText.on('input', (ev) => {
         formula = (ev.target.getValue());
     });
 
-    let xd = "";
+    let xd = "3y-6x";
     $("#x-derivative").on('input', (ev) => {
         xd = (ev.target.getValue());
     });
-    let yd = "";
+    let yd = "3x+2-4y";
     $("#y-derivative").on('input', (ev) => {
         yd = (ev.target.getValue());
     });
@@ -67,6 +67,40 @@ $(document).ready(function () {
         let iterationDiv = $('<div class="iteration"></div>');
         iterationsWrapper.append($('<span class="solution-title">Solution</span>'));
         for (let i = 0; i < repetitions; i++) {
+            let x = iterations[i][1];
+            let y = iterations[i][2];
+            let xdv = iterations[i][3];
+            let ydv = iterations[i][4];
+            let fxy = iterations[i][5];
+            let gh = iterations[i][6];
+            let ghd = iterations[i][7];
+            let h = iterations[i][8];
+
+            iterationDiv.append($(`<h3 class="iteration-header">Iteration ${i + 1}:</h3>`));
+            let iterationContent = $('<p class="iteration-content"></p>');
+
+            iterationContent.append($(`<span><strong>Step 1: </strong>Get the values of the partial derivatives of x and y.<br><math-field class="solution" readonly>$$ \\frac{\\partial f}{\\partial x} $$: </math-field>${xdv}<br><math-field class="solution" readonly>$$ \\frac{\\partial f}{\\partial y} $$: </math-field>${ydv}</span>`));
+            iterationContent.append($(`<span><strong>Step 2: </strong>Get the value of f(x,y).<br>f(x,y): ${fxy}</span>`));
+            iterationContent.append($(`<span><strong>Step 3: </strong>Get the value of g(h) and its derivative, and compute for h.<br>g(h): ${gh}<br>g'(h): ${ghd}<br>h: ${h}</span>`));
+            if (i != repetitions) {
+                iterationContent.append($(`<span><strong>Step 4: </strong>Compute for the new values of x and y.<br>x: ${iterations[i+1][1]}<br>y: ${iterations[i+1][2]}</span>`));
+            }
+            
+            let tr = $('<tr class="table-data"></tr>');
+            let counter = 0;
+            iterations[i].forEach(e => {
+                console.log(`i = ${counter}, e=${e}`);
+                if (counter != 5 && counter != 6 && counter != 7) {
+                    let th = $(`<td>${e}</td>`);
+                    tr.append(th);
+                }
+                counter++;
+
+            });
+            iterationContent.append(`<br><br>`);
+            iterationDiv.append(iterationContent);
+            iterationsWrapper.append(iterationDiv);
+            results.append(tr);
         }
         console.log(iterations);
     });
@@ -83,29 +117,50 @@ function calculate(ce, expression, x0, y0, xd, yd, repetitions) {
 
     let xdv;
     let ydv;
-    for (let i = 0; i < repetitions; i++) {
+
+    let h;
+
+    let fxy;
+
+    let gh;
+    let ghd;
+    for (let i = 0; i <= repetitions; i++) {
         if (i == 0) {
             x = parseFloat(x0);
             y = parseFloat(y0);
         }
+        else {
+            x = x + (xdv * h);
+            x = parseFloat(x.toFixed(2));
+
+            y = y + (ydv * h);
+            y = parseFloat(y.toFixed(2));
+        }
         // Get partial derivative of x
         xdv = ce.parse(xd);
         xdv = xdv.subs({ x: ce.box(x), y: ce.box(y) });
+        xdv = parseFloat(xdv.N().numericValue.toFixed(4));
 
         // Get partial derivative of y
         ydv = ce.parse(yd);
         ydv = ydv.subs({ x: ce.box(x), y: ce.box(y) });
+        ydv = parseFloat(ydv.N().numericValue.toFixed(4));
 
         // Get function value of xy
-        let fxy = expression;
-        fxy = fxy.replaceAll("x", `\\left(${x}+${xdv.N().numericValue}h\\right)`);
-        fxy = fxy.replaceAll("y", `\\left(${y}+${ydv.N().numericValue}h\\right)`);
-        fxy = ce.parse(fxy);
+        fxy = expression;
+        // fxy = fxy.replaceAll("x", `\\left(${x}+${xdv}h\\right)`);
+        // fxy = fxy.replaceAll("y", `\\left(${y}+${ydv}h\\right)`);
+        fxy = fxy.replaceAll("x", `(${x}+${xdv}h)`);
+        fxy = fxy.replaceAll("y", `(${y}+${ydv}h)`);
+        //fxy = ce.parse(fxy);
+        gh = math.rationalize(fxy).toString();
+        // Derivative of gh
 
-        let gh = ce.box(['Expand', fxy]).evaluate().latex;
-        let ghd = math.derivative(gh, 'h').toString();
-        let h;
-        iterations.push([x, y, xdv.N().numericValue, ydv.N().numericValue, fxy.latex, gh, ghd, h]);
+        ghd = nerdamer.diff(gh, 'h').toString();
+        h = ce.parse(nerdamer(ghd).solveFor('h').toString()).N().numericValue;
+        h = parseFloat(h.toFixed(4));
+        iterations.push([i + 1, x, y, xdv, ydv, fxy, gh, ghd, h]);
+        // iterations.push([i + 1, x, y, xdv, ydv, h]);
     }
     return iterations;
 }

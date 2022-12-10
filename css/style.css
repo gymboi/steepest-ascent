@@ -396,6 +396,16 @@ input {
   color: black;
 }
 
+.table-header {
+  background-color: transparent;
+  border: none;
+}
+
+math-field.solution {
+  background-color: transparent;
+  border: none;
+}
+
 th {
   position: -webkit-sticky;
   /* for Safari */
