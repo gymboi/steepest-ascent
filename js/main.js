@@ -22,16 +22,16 @@ $(document).ready(function () {
 
     // Function code
     let functionText = $("#function");
-    let formula = "3xy+2y-3x^2-2y^2";
+    let formula;
     functionText.on('input', (ev) => {
         formula = (ev.target.getValue());
     });
 
-    let xd = "3y-6x";
+    let xd;
     $("#x-derivative").on('input', (ev) => {
         xd = (ev.target.getValue());
     });
-    let yd = "3x+2-4y";
+    let yd;
     $("#y-derivative").on('input', (ev) => {
         yd = (ev.target.getValue());
     });
@@ -79,9 +79,9 @@ $(document).ready(function () {
             iterationDiv.append($(`<h3 class="iteration-header">Iteration ${i + 1}:</h3>`));
             let iterationContent = $('<p class="iteration-content"></p>');
 
-            iterationContent.append($(`<span><strong>Step 1: </strong>Get the values of the partial derivatives of x and y.<br><math-field class="solution" readonly>$$ \\frac{\\partial f}{\\partial x} $$: </math-field>${xdv}<br><math-field class="solution" readonly>$$ \\frac{\\partial f}{\\partial y} $$: </math-field>${ydv}</span>`));
-            iterationContent.append($(`<span><strong>Step 2: </strong>Get the value of f(x,y).<br>f(x,y): ${fxy}</span>`));
-            iterationContent.append($(`<span><strong>Step 3: </strong>Get the value of g(h) and its derivative, and compute for h.<br>g(h): ${gh}<br>g'(h): ${ghd}<br>h: ${h}</span>`));
+            iterationContent.append($(`<span><strong>Step 1: </strong>Get the values of the partial derivatives of x and y.<br><math-field class="solution" readonly>$$ \\frac{\\partial f}{\\partial x} $$: ${xdv}</math-field><br><math-field class="solution" readonly>$$ \\frac{\\partial f}{\\partial y} $$: ${ydv}</math-field></span>`));
+            iterationContent.append($(`<span><strong>Step 2: </strong>Get the value of f(x,y).<br><math-field class="solution" readonly>f(x,y): ${fxy}</math-field></span>`));
+            iterationContent.append($(`<span><strong>Step 3: </strong>Get the value of g(h) and its derivative, and compute for h.<br><math-field class="solution" readonly>g(h): ${gh}</math-field><br><math-field class="solution" readonly>g'(h): ${ghd}</math-field><br><math-field class="solution" readonly>h: ${h}</math-field></span>`));
             if (i != repetitions) {
                 iterationContent.append($(`<span><strong>Step 4: </strong>Compute for the new values of x and y.<br>x: ${iterations[i+1][1]}<br>y: ${iterations[i+1][2]}</span>`));
             }
@@ -148,8 +148,6 @@ function calculate(ce, expression, x0, y0, xd, yd, repetitions) {
 
         // Get function value of xy
         fxy = expression;
-        // fxy = fxy.replaceAll("x", `\\left(${x}+${xdv}h\\right)`);
-        // fxy = fxy.replaceAll("y", `\\left(${y}+${ydv}h\\right)`);
         fxy = fxy.replaceAll("x", `(${x}+${xdv}h)`);
         fxy = fxy.replaceAll("y", `(${y}+${ydv}h)`);
         //fxy = ce.parse(fxy);
