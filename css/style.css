@@ -490,6 +490,7 @@ tr:first-child {
     margin-left: unset;
     align-items: center;
     gap: 2rem;
+    max-height: unset;
   }
 
   .row {
@@ -498,6 +499,7 @@ tr:first-child {
 
   .row:first-child {
     width: 75vw;
+    max-height: unset;
   }
 
   .results-wrapper {
