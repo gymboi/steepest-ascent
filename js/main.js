@@ -83,7 +83,7 @@ $(document).ready(function () {
             iterationContent.append($(`<span><strong>Step 2: </strong>Get the value of f(x,y).<br><math-field class="solution" readonly>f(x,y): ${fxy}</math-field></span>`));
             iterationContent.append($(`<span><strong>Step 3: </strong>Get the value of g(h) and its derivative, and compute for h.<br><math-field class="solution" readonly>g(h): ${gh}</math-field><br><math-field class="solution" readonly>g'(h): ${ghd}</math-field><br><math-field class="solution" readonly>h: ${h}</math-field></span>`));
             if (i != repetitions) {
-                iterationContent.append($(`<span><strong>Step 4: </strong>Compute for the new values of x and y.<br>x: ${iterations[i+1][1]}<br>y: ${iterations[i+1][2]}</span>`));
+                iterationContent.append($(`<span><strong>Step 4: </strong>Compute for the new values of x and y.<br><math-field class="solution" readonly>x: ${iterations[i+1][1]}</math-field><br><math-field class="solution" readonly>y: ${iterations[i+1][2]}</math-field></span>`));
             }
             
             let tr = $('<tr class="table-data"></tr>');
