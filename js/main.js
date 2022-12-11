@@ -154,7 +154,7 @@ function calculate(ce, expression, x0, y0, xd, yd, repetitions) {
         gh = math.rationalize(fxy).toString();
         // Derivative of gh
 
-        ghd = nerdamer.diff(gh, 'h').toString();
+        ghd = math.rationalize(nerdamer.diff(gh, 'h').toString()).toString();
         h = ce.parse(nerdamer(ghd).solveFor('h').toString()).N().numericValue;
         h = parseFloat(h.toFixed(4));
         iterations.push([i + 1, x, y, xdv, ydv, fxy, gh, ghd, h]);
