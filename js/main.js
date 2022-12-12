@@ -83,7 +83,7 @@ $(document).ready(function () {
             iterationContent.append($(`<span><strong>Step 2: </strong>Get the value of f(x,y).<br><math-field class="solution" readonly>f(x,y): ${fxy}</math-field></span>`));
             iterationContent.append($(`<span><strong>Step 3: </strong>Get the value of g(h) and its derivative, and compute for h.<br><math-field class="solution" readonly>g(h): ${gh}</math-field><br><math-field class="solution" readonly>g'(h): ${ghd}</math-field><br><math-field class="solution" readonly>h: ${h}</math-field></span>`));
             if (i != repetitions) {
-                iterationContent.append($(`<span><strong>Step 4: </strong>Compute for the new values of x and y.<br><math-field class="solution" readonly>x: ${iterations[i+1][1]}</math-field><br><math-field class="solution" readonly>y: ${iterations[i+1][2]}</math-field></span>`));
+                iterationContent.append($(`<span><strong>Step 4: </strong>Compute for the new values of x and y.<br><math-field class="solution" readonly>x: ${iterations[i][1]} + ${iterations[i+1][1]}h</math-field><br><math-field class="solution" readonly>x: ${iterations[i+1][1]}</math-field><br><math-field class="solution" readonly>y: ${iterations[i][2]} + ${iterations[i+1][2]}h</math-field><br><math-field class="solution" readonly>y: ${iterations[i+1][2]}</math-field></span>`));
             }
             
             let tr = $('<tr class="table-data"></tr>');
@@ -150,15 +150,15 @@ function calculate(ce, expression, x0, y0, xd, yd, repetitions) {
         fxy = expression;
         fxy = fxy.replaceAll("x", `(${x}+${xdv}h)`);
         fxy = fxy.replaceAll("y", `(${y}+${ydv}h)`);
-        //fxy = ce.parse(fxy);
-        gh = math.rationalize(fxy).toString();
-        // Derivative of gh
 
+        gh = math.rationalize(fxy).toString();
+
+        // Derivative of gh
         ghd = math.rationalize(nerdamer.diff(gh, 'h').toString()).toString();
+
         h = ce.parse(nerdamer(ghd).solveFor('h').toString()).N().numericValue;
         h = parseFloat(h.toFixed(4));
         iterations.push([i + 1, x, y, xdv, ydv, fxy, gh, ghd, h]);
-        // iterations.push([i + 1, x, y, xdv, ydv, h]);
     }
     return iterations;
 }
