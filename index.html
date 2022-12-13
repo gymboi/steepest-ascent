@@ -44,6 +44,137 @@
       <span>Steepest Ascent</span>
       Method Calculator
     </div>
+    <div class="modal-wrapper" id="discussion-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close">&times;</span>
+          Discussion of Theory
+        </div>
+        <div class="modal-body">
+          <h3>Background Information</h3>
+          <p>
+            Steepest Ascent or descent method, also known as the saddle-point
+            method, is a numerical method that is an extension of Laplace's
+            method. Mathematicians and historians accredited this method to the
+            physicist Peter Debye in 1909. Still, there is no proven creator,
+            for too many present articles show that the technique was used
+            before 1909. <br />
+            <br />This method aims to find the minimum and maximum of
+            differentiable functions. This approach or strategy's ideology is
+            that if the gradient or slope is not zero where you are, you must
+            move or select a direction opposite that is a gradient.
+          </p>
+          <br />
+          <h3>Algorithm</h3>
+          <p>Step 1: Declare the values of x<sub>0</sub> and y<sub>0</sub>.</p>
+          <p>
+            Step 2: Given a function, get the value of the partial derivatives
+            of x and y.
+          </p>
+          <p>Step 3: Substitute the bisolved values of x and y with the given function and solve.</p>
+          <p>Step 4: Declare g(h) which holds the value of the solved function.</p>
+          <p>Step 5: Get the derivation of g(h) using the formula:<math-field readonly>d/dx x^n = nx^{n-1}</math-field> (Power rule)</p>
+          <p>Step 6: Using g’(h), get the value of h.</p>
+          <p>Step 7: Go back to step 4 and solve for x<sub>n</sub> and y<sub>n</sub></p>
+          <br />
+          <h3>Limitations</h3>
+          <p>Limitations of the method:</p>
+          <ul>
+            <li>
+              The steepest ascent method is a simple and intuitive optimization
+              technique, and was also used to develop the theory of
+              optimization. Unfortunately, this method is not widely used due to
+              its poor and slow performance in most real-world problems (Meza,
+              2010). Using this method can be computationally expensive to
+              compute the gradient at each iteration, especially for large and
+              complex problems. This can make the method inefficient and slow to
+              converge on a solution, therefore, it may not always find the
+              absolute best solution to a problem.
+            </li>
+            <li>
+              Choosing the right initial point is also important for this method
+              because it is very sensitive to initial conditions, just like in
+              Newton’s Method (Foote, 2007). The algorithm may converge to
+              different solutions depending on the starting point. This can make
+              it difficult to predict the behavior of the algorithm and can lead
+              to inconsistent results.
+            </li>
+            <li>
+              While the steepest ascent method is a useful optimization
+              technique in some cases, it has limitations that can make it less
+              effective for certain problems. It is important to carefully
+              consider the strengths and weaknesses of this method and to choose
+              the appropriate optimization algorithm for a given problem.
+            </li>
+          </ul>
+          <p>Limitations of the application:</p>
+          <ul>
+            <li>It takes an ample amount of time to solve a given problem</li>
+            <li>Decimal places are limited to 4.</li>
+            <li>
+              Browser window must be maximized for a better viewing experience.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-wrapper" id="example-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close">&times;</span>
+          Example
+        </div>
+        <div class="modal-body"></div>
+      </div>
+    </div>
+
+    <div class="modal-wrapper" id="about-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close">&times;</span>
+          <h1 style="text-align: center; padding-bottom: 10px">Our Team</h1>
+          <p style="text-align: center; font-size: 11pt; font-weight: normal">
+            We are a group of Computer Science students tasked to make a
+            Steepest Ascent Method Calculator for the subject Numerical Methods
+            for Computer Science. We programmed our project with HTML, CSS, and
+            JavaScript. We learned so much from this project, which helped us
+            grow our programming skills and relationship with each other. We are
+            not doing this project just for compliance's sake; we hope it will
+            benefit others.
+          </p>
+        </div>
+        <div class="modal-body">
+          <div id="flex-container">
+            <div class="flex-box">
+              <img class="img" src="images/raph.jpg" />
+              <h2 class="img-text">Raphael Del Rosario</h2>
+              <h3 class="role-text">Developer</h3>
+            </div>
+            <div class="flex-box">
+              <img class="img" src="images/jethro.jpg" />
+              <h2 class="img-text">Jethro Estangki</h2>
+              <h3 class="role-text">Developer</h3>
+            </div>
+            <div class="flex-box">
+              <img class="img" src="images/louie.jpg" />
+              <h2 class="img-text">Louie Miguel Mejia</h2>
+              <h3 class="role-text">Developer</h3>
+            </div>
+            <div class="flex-box">
+              <img class="img" src="images/kipp.jpg" />
+              <h2 class="img-text">Kiefer John Sanchez</h2>
+              <h3 class="role-text">Developer</h3>
+            </div>
+            <div class="flex-box">
+              <img class="img" src="images/matthew.jpg" />
+              <h2 class="img-text">Matthew Ventigan</h2>
+              <h3 class="role-text">Developer</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <main>
       <div class="row">
         <div class="column">

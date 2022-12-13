@@ -6,6 +6,26 @@ $(document).ready(function () {
     let exampleButton = $('#example');
     let aboutButton = $('#about');
 
+    var closeBtn = document.getElementsByClassName("close");
+    console.log(closeBtn);
+    Array.prototype.forEach.call(closeBtn, button => {
+        button.onclick = () => {
+            button.parentElement.parentElement.parentElement.style.display = 'none';
+        }
+    });
+
+    discussionButton.on('click', () => {
+        document.getElementById('discussion-modal').style.display = 'block'
+    });
+
+    exampleButton.on('click', () => {
+        document.getElementById('example-modal').style.display = 'block'
+    });
+
+    aboutButton.on('click', () => {
+        document.getElementById('about-modal').style.display = 'block'
+    });
+
     menuButton.on('click', () => {
         header.toggleClass('open');
         buttonWrapper.toggleClass('open');
@@ -83,9 +103,9 @@ $(document).ready(function () {
             iterationContent.append($(`<span><strong>Step 2: </strong>Get the value of f(x,y).<br><math-field class="solution" readonly>f(x,y): ${fxy}</math-field></span>`));
             iterationContent.append($(`<span><strong>Step 3: </strong>Get the value of g(h) and its derivative, and compute for h.<br><math-field class="solution" readonly>g(h): ${gh}</math-field><br><math-field class="solution" readonly>g'(h): ${ghd}</math-field><br><math-field class="solution" readonly>h: ${h}</math-field></span>`));
             if (i != repetitions) {
-                iterationContent.append($(`<span><strong>Step 4: </strong>Compute for the new values of x and y.<br><math-field class="solution" readonly>x: ${iterations[i][1]} + ${iterations[i+1][1]}h</math-field><br><math-field class="solution" readonly>x: ${iterations[i+1][1]}</math-field><br><math-field class="solution" readonly>y: ${iterations[i][2]} + ${iterations[i+1][2]}h</math-field><br><math-field class="solution" readonly>y: ${iterations[i+1][2]}</math-field></span>`));
+                iterationContent.append($(`<span><strong>Step 4: </strong>Compute for the new values of x and y.<br><math-field class="solution" readonly>x: ${iterations[i][1]} + ${iterations[i + 1][1]}h</math-field><br><math-field class="solution" readonly>x: ${iterations[i + 1][1]}</math-field><br><math-field class="solution" readonly>y: ${iterations[i][2]} + ${iterations[i + 1][2]}h</math-field><br><math-field class="solution" readonly>y: ${iterations[i + 1][2]}</math-field></span>`));
             }
-            
+
             let tr = $('<tr class="table-data"></tr>');
             let counter = 0;
             iterations[i].forEach(e => {

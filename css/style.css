@@ -192,7 +192,7 @@ main {
   width: 100%;
 }
 
-.modal {
+.modal-wrapper {
   display: none;
   position: fixed;
   z-index: 1;
@@ -204,6 +204,12 @@ main {
   overflow: auto;
   background-color: #000;
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-wrapper math-field {
+  border: none;
+  display: block;
+  margin-left: 2rem;
 }
 
 .modal-header {
@@ -506,8 +512,9 @@ tr:first-child {
     margin-left: unset;
   }
 
-  #modal-wrapper2 img {
-    width: 600px;
+  #about-modal img {
+    height: 200px;
+    width: 200px;
   }
 
   #flex-container {
